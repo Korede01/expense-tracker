@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: expense_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: securepass
+  redis:
+    image: redis:alpine
